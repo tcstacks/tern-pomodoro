@@ -1,0 +1,213 @@
+/* Pane-native UI: no card or branding; a little tint on active controls. */
+.sf-main[data-surface='plugin.pomodoro.timer'] {
+    justify-content: center;
+    position: relative;
+    padding: 24px 16px;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo {
+    --pomo-clock-size: 72px;
+    --pomo-clock-height: 86.4px;
+    --pomo-clock-spacing: -3px;
+    font-family: var(--sans);
+    color: var(--t1);
+    width: 100%;
+    /* Surface nodes have inline size bounds. Keep wide panes restrained. */
+    max-width: 320px !important;
+    margin: auto;
+    text-align: center;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-modes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+[data-surface='plugin.pomodoro.timer'] button {
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 160ms var(--ease), background-color 160ms var(--ease);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-mode {
+    padding: 5px 8px;
+    font-size: 12px;
+    color: var(--t3);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-mode.selected {
+    color: var(--accent-ink);
+    background: rgb(from var(--accent) r g b / 4%);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-clock {
+    position: relative;
+    height: var(--pomo-clock-height);
+}
+/* Persistent layers crossfade without changing any layout measurements. */
+[data-surface='plugin.pomodoro.timer'] .pomo-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 180ms var(--ease), transform 220ms var(--ease);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-edit {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-editing .pomo-idle {
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-editing .pomo-edit,
+[data-surface='plugin.pomodoro.timer'] .pomo:not(.pomo-editing) .pomo-idle {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-time {
+    cursor: text;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-time,
+[data-surface='plugin.pomodoro.timer'] [data-role='pomodoro.duration'] {
+    font-family: var(--sans);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--pomo-clock-size);
+    font-weight: 300;
+    letter-spacing: var(--pomo-clock-spacing);
+    line-height: 1.2;
+}
+[data-surface='plugin.pomodoro.timer'] [data-role='pomodoro.duration'] {
+    /* Match the countdown's footprint, without a boxed input or focus ring. */
+    --sf-lh: var(--pomo-clock-height);
+    height: var(--pomo-clock-height);
+    width: 100%;
+    max-width: 224px !important;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: inset 0 -1px 0 rgb(from var(--accent) r g b / 25%);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-status .pomo-error {
+    color: var(--accent-ink);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-status {
+    min-height: 18px;
+    position: relative;
+    height: 18px;
+    line-height: 18px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--t3);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-progress {
+    width: 160px;
+    margin: 14px auto 16px;
+    opacity: 0.55;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-controls {
+    position: relative;
+    height: 34px;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-control-row {
+    display: grid;
+    grid-template-columns: 64px 76px 64px;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-control-row .pomo-secondary:first-child {
+    justify-self: end;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-control-row .pomo-secondary:last-child {
+    justify-self: start;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-primary {
+    min-width: 76px;
+    padding: 8px;
+    color: var(--accent-ink);
+    background: rgb(from var(--accent) r g b / 5%);
+    font-size: 13px;
+    font-weight: 550;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-secondary {
+    padding: 8px 4px;
+    color: var(--t3);
+    font-size: 11px;
+}
+[data-surface='plugin.pomodoro.timer'] button:hover {
+    background: var(--l1);
+    color: var(--t1);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-primary:hover,
+[data-surface='plugin.pomodoro.timer'] .pomo-mode.selected:hover {
+    color: var(--accent-ink);
+    background: rgb(from var(--accent) r g b / 8%);
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-footer {
+    margin-top: 18px;
+    color: var(--t3);
+    font-size: 10px;
+}
+[data-surface='plugin.pomodoro.timer'] .pomo-compact {
+    --pomo-clock-size: 52px;
+    --pomo-clock-height: 62.4px;
+    --pomo-clock-spacing: -2px;
+}
+.sf-main.sf-still[data-surface='plugin.pomodoro.timer'] .pomo-layer {
+    transition: none;
+    transform: none;
+}
+
+/* Tern's native bell uses this ripple shader and paired clock/amplitude tracks.
+   Apply it to the full region, then remove its role after the effect ends. */
+.sf-main[data-surface='plugin.pomodoro.timer'][data-role='pomodoro.expiry'] {
+    filter: ripple(50% 50%, 0px, 22, 3.5, 620);
+    animation: pomodoro-wave-clock 1.1s linear, pomodoro-wave-fade 1.1s linear;
+}
+.sf-main[data-surface='plugin.pomodoro.timer'][data-role='pomodoro.expiry']::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: rgb(from var(--accent) r g b / 4%);
+    animation: pomodoro-wave-flash 0.5s var(--ease) forwards;
+}
+@keyframes pomodoro-wave-clock {
+    from { -stencil-time: 0s; }
+    to { -stencil-time: 1.1s; }
+}
+@keyframes pomodoro-wave-fade {
+    from, 45% { filter: ripple(50% 50%, 4px, 22, 3.5, 620); }
+    to { filter: ripple(50% 50%, 0px, 22, 3.5, 620); }
+}
+@keyframes pomodoro-wave-flash {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+.sf-main.sf-paused[data-surface='plugin.pomodoro.timer'][data-role='pomodoro.expiry'],
+.sf-main.sf-covered[data-surface='plugin.pomodoro.timer'][data-role='pomodoro.expiry'] {
+    animation-play-state: paused;
+}
+.sf-main.sf-still[data-surface='plugin.pomodoro.timer'][data-role='pomodoro.expiry'] {
+    filter: none;
+    animation: none;
+}
+.sf-main.sf-still[data-surface='plugin.pomodoro.timer'][data-role='pomodoro.expiry']::after {
+    animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    [data-surface='plugin.pomodoro.timer'] .pomo-layer {
+        transition: none;
+        transform: none;
+    }
+    .sf-main[data-surface='plugin.pomodoro.timer'][data-role='pomodoro.expiry'] {
+        filter: none;
+        animation: none;
+    }
+    .sf-main[data-surface='plugin.pomodoro.timer'][data-role='pomodoro.expiry']::after {
+        animation: none;
+    }
+}

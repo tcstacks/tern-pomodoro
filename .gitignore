@@ -1,0 +1,4 @@
+/target/
+/dist/
+/tern.d.luau
+.DS_Store

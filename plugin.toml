@@ -1,0 +1,11 @@
+schema = 1
+id = "pomodoro"
+name = "Pomodoro"
+version = "1.0.0"
+description = "A minimal Pomodoro timer with adjustable focus and break intervals."
+host = "host.luau"
+styles = ["styles.css"]
+
+[[blocks]]
+id = "timer"
+title = "Pomodoro"
